@@ -1,0 +1,160 @@
+/* Stuff from https://www.w3schools.com/howto/howto_css_sidebar_responsive.asp */
+
+/* Side navigation menu */
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+/* Sidebar links */
+
+.sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+}
+
+/* Active/current link */
+.sidebar a.active {
+    background-color: #0faa6d;
+    color: white;
+}
+
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+
+div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+}
+
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+}
+
+/* On screens that are less than 400px, display the bar vertically instead of horizontally */
+@media screen and (max-width: 400px) {
+    .sidebar a {
+        text-align: center;
+        float: none;
+    }
+}
+
+/* End of stuff from https://www.w3schools.com/howto/howto_css_sidebar_responsive.asp */
+/* MOBILE VERSION */
+
+/* body {
+    font-family: 'Verdana', sans-serif;
+    font-size: 16px;
+    margin: 0px auto;
+    background: #eeeeee;
+}
+
+logo {
+    h1 {
+        font-weight: bold;
+        font-size: 40px;
+        text-align: center;
+    }
+}
+
+header, footer, div.content {
+    width: 100%;
+    padding: 10px 5px;
+    background: #a1743f
+}
+
+header h1 {
+    color: #d0c0a0;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 40px;
+}
+
+footer {
+    font-size: 14px;
+    font-style: italic;
+    text-align: center;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+div.content {
+    background: #ffffee
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+} */
+
+/* DESKTOP VERSION */
+
+/* 
+@media only screen and (min-width: 900px) {
+    logo{
+        h1 {
+            font-size: 70px;
+        }
+    }
+
+    header, footer, div.page{
+        width: 760px;
+        margin: 0px auto;
+
+    }
+
+    div.page {
+        padding: 0px;
+        margin: 0px auto;
+    }
+    div.content {
+        margin: 0px auto;
+    }
+    
+    header {
+        margin: 20px auto 0x auto;
+        border-radius: 20px 20px 0px 0px;
+        font-size: 16px;
+    }
+
+    div.page {
+        box-shadow: 0px 0px 5px 5px lightgray;
+        background-color: #ffffff;
+    }
+    
+    footer {
+        margin: 0px auto 50px auto;
+        border-radius: 0px 0px 20px 20px;
+    }
+
+    body {
+        margin: 0px 0px;
+    }
+
+    img {
+        max-width: 100%;
+    }
+}
+*/

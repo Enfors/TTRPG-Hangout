@@ -1,0 +1,33 @@
+<!doctype html>
+<title>{% block title %}{% endblock %} - TTRPG-Hangout.com</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<section class="content2">
+  
+  <logo>
+    <h1>TTRPG-Hangout.com</h1>
+  </logo>
+
+  <!-- The page -->
+  <div class="page">
+    <!-- The eader -->
+    <header>
+      {% block header %}{% endblock %}
+    </header>
+    <!-- The sidebar -->
+    <div class="sidebar">
+      <a class="active" href="/">Home</a>
+      <a href="#about">About</a>
+    </div>
+    <!-- Flash messages -->
+    {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+    <div class="content">  
+      {% block content %}{% endblock %}
+    </div>
+    <footer>
+      Copyright © 2025 Christer Enfors
+    </footer>
+  </div class="page">
+</section>
+    

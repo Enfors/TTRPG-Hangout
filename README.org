@@ -1,0 +1,19 @@
+* TTRPG-Web
+
+This is, as of 2025-03-26, my latest attempt at building ttrpg-hangout.com.
+
+- It's based on https://tedboy.github.io/flask/quickstart/quickstart1.html.
+- The template stuff is from https://flask.palletsprojects.com/en/stable/tutorial/templates/.
+
+The aim here is to make a minimalist version of ttrpg-hangout.com that uses routes and templates, no SQL (initially), and just loads html files from a directory.
+
+* Starting it
+
+. ~/venvs/TTRPG-Web/bin/activate
+./start.sh  # Will start it on 127.0.0.1:5000
+
+* Status / Things that work
+
+http://127.0.0.1:5000 is a default start page, but does not have navigation stuff.
+http://127.0.0.1:5000/article/springhaven etc also works. This has navigation.
+
