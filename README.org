@@ -17,4 +17,5 @@ The aim here is to make a minimalist version of ttrpg-hangout.com that uses rout
 http://127.0.0.1:5000 is a default start page, but does not have navigation stuff.
 http://127.0.0.1:5000/article/springhaven etc also works. This has navigation.
 
-- What I'm doing now: Reading https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Introduction
+- What I'm doing now: Reading
+  https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox
