@@ -1,35 +1,44 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - TTRPG-Hangout.com</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<section class="content2">
-  
-  <logo>
+<header>
+  <title>{% block title %}{% endblock %} - TTRPG-Hangout.com</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <div>
     <h1>TTRPG-Hangout.com</h1>
-  </logo>
+  </div>
+</header>
 
+<!-- The sidebar -->
+<nav>
+  <div>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="https://ttrpg-hangout.social">Mastodon</a></li>
+      <li><a href="/">YouTube</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+<body>
   <!-- The page -->
-  <div class="page">
-    <!-- The header -->
-    <header>
+  <main>
+    <div>
+      <!-- The header -->
       {% block header %}{% endblock %}
-    </header>
-    <!-- The sidebar -->
-    <div class="sidebar">
-      <a class="active" href="/">Home</a>
-      <a class="inactive" href="https://ttrpg-hangout.social">TTRPG-Hangout Mastodon instance</a>
-      <a class="inactive" href="/">YouTube channel</a>
-      <a href="#about">About</a>
-    </div>
-    <!-- Flash messages -->
-    {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-    {% endfor %}
-    <div class="content">  
-      {% block content %}{% endblock %}
-    </div>
-    <footer>
+      <!-- Flash messages -->
+      {% for message in get_flashed_messages() %}
+      <div class="flash">{{ message }}</div>
+      {% endfor %}
+      <div class="content">  
+        {% block content %}{% endblock %}
+      </div>
+  </main>
+
+  <!-- The footer -->
+  <footer>
+    <div>
       Copyright © 2025 Christer Enfors
-    </footer>
-  </div class="page">
-</section>
+    </div>
+  </footer>
+</body>
     

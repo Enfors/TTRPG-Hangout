@@ -1,5 +1,5 @@
 body {
-    background: #a85e32;
+    background: #c88e82;
     display: grid;
     gap: 1em;
     grid: 'header' auto
@@ -11,6 +11,7 @@ body {
 
 div {
     padding: 1em;
+    background: white;
 }
 
 @media (min-width: 40em) {
@@ -23,7 +24,19 @@ div {
     }
 }
 
-header { grid-area: header; background: white; }
-nav { grid-area: nav; background: white; }
-main { grid-area: main; background: white; padding: 1em;}
-footer { grid-area: footer; background: white; }
+header {
+    grid-area: header;
+}
+
+nav {
+    grid-area: nav;
+    min-width: 10em;
+}
+
+main {
+    grid-area: main;
+}
+
+footer {
+    grid-area: footer;
+}
