@@ -5,6 +5,9 @@ body {
     grid: 'header' auto
           'nav' auto
           'main' 1fr
+          'ads' auto
+          'recent' auto
+          'popular' auto
           'footer' auto
           / 1fr;
 }
@@ -19,7 +22,10 @@ div {
         grid-template-areas:
             'header header'
             'main nav'
-            'footer nav'
+            'main recent'
+            'main ads'
+            'main popular'
+            'footer footer'
         ;
     }
 }
@@ -31,6 +37,22 @@ header {
 nav {
     grid-area: nav;
     min-width: 20em;
+}
+
+recent {
+    grid-area: recent;
+}
+
+ads {
+    grid-area: ads;
+}
+
+bads {
+    grid-area: bads
+}
+
+popular {
+    grid-area: popular;
 }
 
 main {
