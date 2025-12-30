@@ -9,8 +9,10 @@ The aim here is to make a minimalist version of ttrpg-hangout.com that uses rout
 
 * Starting it
 
+#+begin_src bash
 . ~/venvs/TTRPG-Hangout/bin/activate
 ./start.sh  # Will start it on 127.0.0.1:5000
+#end_src
 
 * Updating the pages
 
@@ -25,5 +27,12 @@ make
 http://127.0.0.1:5000 is a default start page, but does not have navigation stuff.
 http://127.0.0.1:5000/article/springhaven etc also works. This has navigation.
 
-- What I'm doing now: Reading
-  https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox
+* Next steps
+
+- Add content to start page
+- Make articles look better
+- Publish on pythonanywhere
+
+* Reference
+
+- https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox
