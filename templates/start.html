@@ -3,3 +3,7 @@
 {% block header %}
   <h1>{% block title %}Welcome to the TTRPG-Hangout!{% endblock %}</h1>
 {% endblock %}
+
+{% block content %}
+  {{ toc_html | safe }}
+{% endblock %}
