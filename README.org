@@ -9,8 +9,16 @@ The aim here is to make a minimalist version of ttrpg-hangout.com that uses rout
 
 * Starting it
 
-. ~/venvs/TTRPG-Web/bin/activate
+. ~/venvs/TTRPG-Hangout/bin/activate
 ./start.sh  # Will start it on 127.0.0.1:5000
+
+* Updating the pages
+
+#+begin_src bash
+. ~/venvs/RoamNotes/bin/activate
+cd ~/devel/RoamNotes
+make
+#+end_src bash
 
 * Status / Things that work
 
