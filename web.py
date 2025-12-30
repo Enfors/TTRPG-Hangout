@@ -2,16 +2,22 @@ from flask import Flask, render_template
 import os
 
 TOC_FILE_NAME = "toc_ttrpg_hangout.html"
+INTRO_FILE_NAME = "intro_ttrpg_hangout.html"
 
 app = Flask(__name__)
 ARTICLE_DIR = "../../RoamNotes"
 
 @app.route("/")
 def start():
+    with open(os.path.join(ARTICLE_DIR, INTRO_FILE_NAME)) as intro_file:
+        intro_html = intro_file.read()
+    
     with open(os.path.join(ARTICLE_DIR, TOC_FILE_NAME)) as toc_file:
         toc_html = toc_file.read()
-    
-    return render_template("start.html", toc_html=toc_html)
+
+    # os.chdir(ARTICLE_DIR)
+        
+    return render_template("start.html", intro_html=intro_html, toc_html=toc_html)
 
 @app.route("/article/<string:article_file_name>")
 def article(article_file_name):
