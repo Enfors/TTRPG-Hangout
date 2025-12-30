@@ -7,7 +7,7 @@ article_dir = "../../RoamNotes"
 
 @app.route("/")
 def start():
-    return "<h1>Welcome to TTRPG-Hangout.com!</h1>"
+    return render_template("start.html")
 
 @app.route("/article/<string:article_file_name>")
 def article(article_file_name):
