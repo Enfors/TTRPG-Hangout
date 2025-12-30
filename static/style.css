@@ -17,6 +17,25 @@ div {
     background: #fcf8ff;
 }
 
+/***** Tables *****/
+
+/* Table headings, table data */
+th, td {
+    padding: 5px;
+    /* border-bottom: 1px solid #ddd; */
+}
+
+/* Table headings */
+th {
+    text-align: left;
+    background-color: #b3b1d0;
+}
+
+
+tr:nth-child(even) {
+    background-color: #e8e0f0
+}
+
 @media (min-width: 70em) {
     body {
         grid-template-areas:
