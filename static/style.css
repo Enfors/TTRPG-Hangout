@@ -10,6 +10,8 @@ body {
           'popular' auto
           'footer' auto
           / 1fr;
+    max-width: 80em;
+    margin: 0 auto;
 }
 
 div {
@@ -50,6 +52,7 @@ tr:nth-child(even) {
 
 header {
     grid-area: header;
+    max-width: 90em;
 }
 
 nav {
@@ -75,8 +78,10 @@ popular {
 
 main {
     grid-area: main;
+    max-width: 70em;
 }
 
 footer {
     grid-area: footer;
+    max-width: 90em;
 }
