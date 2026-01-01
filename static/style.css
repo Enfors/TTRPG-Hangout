@@ -40,12 +40,47 @@ tr:nth-child(even) {
 /***** Images *****/
 
 img {
+    /* Responsiveness */
     max-width: 100%;
     height: auto;   /* Preserve aspect ratio */
+
+    /* Centering */
     display: block; /* Removes tiny gap below inline images */
-    margin: 0 auto; /* Optional: centers the image */
+    margin: 2rem auto; /* 2rem top/bottom, auto left/right */
+
+    /* Add polish */
+    border-radius: 8px; /* Smooth corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow */
+
+    /* Optional: Border to define edges on white backgrounds */
+    border: 1px solid #e0e0e0;
 }
 
+/***** Captions *****/
+
+figure {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+figcaption {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.5rem;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+figure img {
+    margin-bottom: 0.5rem; /* Small gap between image and caption */
+}
+
+/* Ensure the figure itself has breathing room */
+figure {
+    margin: 2rem auto; /* Separate the whole block from the text */
+    text-align: center;
+    display: table; /* Optional: keeps the caption width matched to image width */
+}
 /**** Media *****/
 
 @media (min-width: 70em) {
