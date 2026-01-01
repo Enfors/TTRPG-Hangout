@@ -1,4 +1,4 @@
-* TTRPG-Web
+* TTRPG-Hangout
 
 This is, as of 2025-03-26, my latest attempt at building ttrpg-hangout.com.
 
@@ -24,13 +24,16 @@ make
 
 * Status / Things that work
 
-http://127.0.0.1:5000 is a default start page, but does not have navigation stuff.
+http://127.0.0.1:5000 is the front page, and it works and has navigation.
 http://127.0.0.1:5000/article/springhaven etc also works. This has navigation.
+
+* How the front page works
+
+The front page is created from web.py, and rendered from a template called start.html. It gets two arguments - the "intro" which is read from the "Intro TTRPG-Hangout" page, and the table of contents which is read from "TOG TTRPG-Hangout" page. These are controlled by constants in web.py.
 
 * Next steps
 
-- Add content to start page
-- Make articles look better
+- Add hook function which updates all the pages
 - Publish on pythonanywhere
 
 * Reference

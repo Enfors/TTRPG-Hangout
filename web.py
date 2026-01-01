@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory
 import os
 
 from bs4 import BeautifulSoup
@@ -7,7 +7,8 @@ TOC_FILE_NAME = "toc_ttrpg_hangout.html"
 INTRO_FILE_NAME = "intro_ttrpg_hangout.html"
 
 app = Flask(__name__)
-ARTICLE_DIR = "../../RoamNotes"
+ARTICLE_DIR = "/home/enfors/www"
+IMAGES_DIR = os.path.join(ARTICLE_DIR, "images")
 
 @app.route("/")
 def start():
@@ -27,6 +28,12 @@ def article(article_file_name):
     html, title = read_html_and_title(html_file_name)
 
     return render_template("article.html", html=html, title=title)
+
+# This route mimics PythonAnywhere's static file serving.
+# It allows your local Flask to serve files from the "images" folder.
+@app.route("/images/<path:image_file_name>")
+def custom_static(image_file_name):
+    return send_from_directory(IMAGES_DIR, image_file_name)
 
 def read_html(file_name):
     with open(os.path.join(ARTICLE_DIR, file_name)) as html_file:
