@@ -37,6 +37,17 @@ tr:nth-child(even) {
     background-color: #e8e0f0
 }
 
+/***** Images *****/
+
+img {
+    max-width: 100%;
+    height: auto;   /* Preserve aspect ratio */
+    display: block; /* Removes tiny gap below inline images */
+    margin: 0 auto; /* Optional: centers the image */
+}
+
+/**** Media *****/
+
 @media (min-width: 70em) {
     body {
         grid-template-areas:
