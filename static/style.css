@@ -56,12 +56,20 @@ img {
     border: 1px solid #e0e0e0;
 }
 
-/***** Captions *****/
-
-figure {
-    margin: 2rem 0;
-    text-align: center;
+figure.align-right, img.align-right {
+    float: right;
+    margin: 0.5rem 1rem 1.5rem; /* Top Right Bottom Left */
+    max-width: 40%; /* Don't let it take up the whole screen */
+    clear: right;
 }
+
+figure.align-left, img.align-left {
+    float: left;
+    margin: 0.5rem 1.5rem 1rem 0; /* Top Right Bottom Left */
+    max-width: 40%
+}
+
+/***** Captions *****/
 
 figcaption {
     font-size: 0.9rem;
@@ -77,10 +85,28 @@ figure img {
 
 /* Ensure the figure itself has breathing room */
 figure {
-    margin: 2rem auto; /* Separate the whole block from the text */
+    margin: 2em auto; /* Separate the whole block from the text */
     text-align: center;
     display: table; /* Optional: keeps the caption width matched to image width */
 }
+
+/***** Links *****/
+
+a {
+    color: #2c5282;
+    text-decoration: underline;
+
+    /* Modern tweaks */
+    text-decoration-thickness: 1px;  /* Thinner than the text */
+    text-underline-offset: 3px;      /* Push it down slightly */
+    text-decoration-skip-ink: auto;  /* Skip descenders (g, p, y) */
+}
+
+a:hover {
+    text-decoration-thickness: 2px;  /* Thicken on interaction */
+    background-color: #dcd8ff; /* Subtle highlight */
+}
+
 /**** Media *****/
 
 @media (min-width: 70em) {
@@ -130,4 +156,14 @@ main {
 footer {
     grid-area: footer;
     max-width: 90em;
+}
+
+/**** Really small screens *****/
+@media (max-width: 40em) {
+    figure.align-right, figure.align-left, img.align-right, img.align-left {
+        float: none;
+        display: block;
+        margin: 1rem auto;
+        max-width: 100%;
+    }
 }
