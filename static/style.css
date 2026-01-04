@@ -11,12 +11,16 @@ body {
     /* 2. Explicitly define the areas (removed the shorthand '/' syntax) */
     grid-template-areas:
         'header'
-        'nav'
         'main'
-        'ads'
-        'recent'
-        'popular'
+        'sidebar'
         'footer';
+}
+
+.sidebar {
+    grid-area: sidebar;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
 }
 
 div {
@@ -119,19 +123,33 @@ a:hover {
     background-color: #dcd8ff; /* Subtle highlight */
 }
 
+/***** Header *****/
+
+header img.banner {
+    margin: 0;
+    border: none;
+    box-shadow: none;
+}
+
+header a {
+    background-color: transparent; /* Remove the highlight on hover for the logo */
+}
+
+header {
+    grid-area: header;
+    /* Ensure the header div itself doesn't have extra padding if it's a div */
+    padding: 0;
+}
+
 /**** Media *****/
 
 @media (min-width: 1400px) {
     body {
         /* 3. Redefine to TWO columns: Main (1000px) and Sidebar (20em) */
         grid-template-columns: 1000px 20em;
-        
         grid-template-areas:
             'header header'
-            'main nav'
-            'main recent'
-            'main ads'
-            'main popular'
+            'main sidebar'
             'footer footer';
     }
 
@@ -152,8 +170,8 @@ header {
 }
 
 nav {
-    grid-area: nav;
-    min-width: 20em;
+    grid-area: unset;
+    min-width: 0;
     max-width: 1000px;
 }
 

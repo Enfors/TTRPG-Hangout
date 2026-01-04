@@ -1,27 +1,13 @@
 <!doctype html>
-<header>
+<head>
   <title>{% block title %}{{title}}{% endblock %} - TTRPG-Hangout.com</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <a href="/"><img src="/images/TTRPG-banner-logo.webp"></a>
-</header>
-
-<!-- The sidebar -->
-<nav>
-  <div>
-    <ul>
-      <li>
-        <a href="https://ttrpg-hangout.social">TTRPG-Hangout.social</a>:
-        The Mastodon instance associated with this site. If you're unfamiliar
-        with Mastodon, think of it as a open and free alternative to Twitter,
-        free from ads, tracking, devious algorithms, and nazis.
-      </li>
-      <li><a href="/">YouTube</a></li>
-      <li><a href="#about">About</a></li>
-    </ul>
-  </div>
-</nav>
-
+</head>
+  
 <body>
+  <header>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <a href="/"><img src="/images/TTRPG-banner-logo.webp"></a>
+  </header>
   <!-- The page -->
   <main>
     <div>
@@ -35,26 +21,43 @@
     </div>
   </main>
 
-  <!-- Recent -->
-  <recent>
-    <div>
-      (Recent articles here)
-    </div>
-  </recent>
+  <!-- The sidebar -->
+  <aside class="sidebar">
+    <nav>
+      <div>
+        <ul>
+          <li>
+            <a href="https://ttrpg-hangout.social">TTRPG-Hangout.social</a>:
+            The Mastodon instance associated with this site. If you're unfamiliar
+            with Mastodon, think of it as a open and free alternative to Twitter,
+            free from ads, tracking, devious algorithms, and nazis.
+          </li>
+          <li><a href="/">YouTube</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Recent -->
+    <recent>
+      <div>
+        (Recent articles here)
+      </div>
+    </recent>
 
-  <!-- Ads -->
-  <ads>
-    <div>
-      (Space reserved for future ads)
-    </div>
-  </ads>
+    <!-- Ads -->
+    <ads>
+      <div>
+        (Space reserved for future ads)
+      </div>
+    </ads>
   
-  <!-- Popular -->
-  <popular>
-    <div>
-      (Popular articles here)
-    </div>
-  </popular>
+    <!-- Popular -->
+    <popular>
+      <div>
+        (Popular articles here)
+      </div>
+    </popular>
+  </aside>
   
   <!-- The footer -->
   <footer>
