@@ -2,9 +2,7 @@
 <header>
   <title>{% block title %}{{title}}{% endblock %} - TTRPG-Hangout.com</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <div>
-    <h1>TableTop RolePlaying Games Hangout</h1>
-  </div>
+  <a href="/"><img src="/images/TTRPG-banner-logo.webp"></a>
 </header>
 
 <!-- The sidebar -->
@@ -29,9 +27,7 @@
       {% for message in get_flashed_messages() %}
       <div class="flash">{{ message }}</div>
       {% endfor %}
-      <div class="content">  
         {% block content %}{% endblock %}
-      </div>
     </div>
   </main>
 

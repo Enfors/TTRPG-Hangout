@@ -1,5 +1,7 @@
 body {
     background: #b3b1d0;
+    background: #579453;
+    background: #456b42;
     display: grid;
     gap: 1em;
     grid: 'header' auto
@@ -10,7 +12,7 @@ body {
           'popular' auto
           'footer' auto
           / 1fr;
-    max-width: 80em;
+    max-width: 1300px;
     margin: 0 auto;
 }
 
@@ -35,10 +37,12 @@ th, td {
 th {
     text-align: left;
     background-color: #b3b1d0;
+    background-color: #b3d0b1;
 }
 
 tr:nth-child(even) {
-    background-color: #e8e0f0
+    background-color: #e8e0f0;
+    background-color: #e8f0e0;
 }
 
 /***** Images *****/
@@ -51,6 +55,7 @@ img {
     /* Centering */
     display: block; /* Removes tiny gap below inline images */
     margin: 2rem auto; /* 2rem top/bottom, auto left/right */
+    margin: 1rem auto;
 
     /* Add polish */
     border-radius: 8px; /* Smooth corners */
@@ -123,6 +128,10 @@ a:hover {
             'main popular'
             'footer footer'
         ;
+    }
+    div {
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8); /* Soft shadow */
     }
 }
 
