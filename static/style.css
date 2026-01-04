@@ -1,3 +1,22 @@
+/**** Everything above the @media lines apply to sub-700 pixel screens *****/
+
+/*****************************************************************************
+
+Quick CSS shorthand, using the picture on a wall analogy:
+
+- padding: The white space inside the picture's frame and the picture itself
+- border: the picture frame
+- margin: The empty space between the picture frame and other picture frames
+
+       Margin
+  +---------------
+  |    Border
+  |  +------------
+  |  | Padding
+  |  |   (content)
+
+*****************************************************************************/
+
 body {
     background: #456b42;
     display: grid;
@@ -43,12 +62,10 @@ th, td {
 /* Table headings */
 th {
     text-align: left;
-    background-color: #b3b1d0;
     background-color: #b3d0b1;
 }
 
 tr:nth-child(even) {
-    background-color: #e8e0f0;
     background-color: #e8f0e0;
 }
 
@@ -65,25 +82,20 @@ img {
     margin: 1rem auto;
 
     /* Add polish */
-    border-radius: 8px; /* Smooth corners */
+    border-radius: 20px; /* Smooth corners */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow */
 
     /* Optional: Border to define edges on white backgrounds */
     border: 1px solid #e0e0e0;
 }
 
-figure.align-right, img.align-right {
-    float: right;
-    margin: 0.5rem 1rem 1.5rem; /* Top Right Bottom Left */
-    max-width: 40%; /* Don't let it take up the whole screen */
-    clear: right;
+figure.align-right, figure.align-left, img.align-right, img.align-left {
+    float: none;
+    display: block;
+    margin: 1rem auto;
+    max-width: 100%;
 }
 
-figure.align-left, img.align-left {
-    float: left;
-    margin: 0.5rem 1.5rem 1rem 0; /* Top Right Bottom Left */
-    max-width: 40%
-}
 
 /***** Captions *****/
 
@@ -126,7 +138,7 @@ a:hover {
 /***** Header *****/
 
 header img.banner {
-    margin: 0 auto; /* Keeps it centered removes the 1rem top/bottom */
+    margin: 0 auto; /* Keeps it centered */
     display: block;
     border: none;
     box-shadow: none;
@@ -140,19 +152,51 @@ header {
     grid-area: header;
     /* Ensure the header div itself doesn't have extra padding if it's a div */
     padding: 0;
+    margin: 0;
     /* This ensures the header itself doesn't have a hidden height */
     line-height: 0;
+
+    img {
+        border-radius: 0;
+    }
 }
 
-main > div {
+main > div { /* main > div means it only affects top level divs under main */
     padding-top: 0.5em;
 }
 
 /**** Media *****/
 
+/***** Screens AT LEAST 701px wide *****/
+@media (min-width: 700px) {
+    header img {
+        border-radius: 0 0 15px 15px;
+    }
+
+    div {
+        border-radius: 8px;
+    }
+
+    figure.align-right, img.align-right {
+        float: right;
+        margin: 0.5rem 1rem 1.5rem; /* Top Right Bottom Left */
+        max-width: 40%; /* Don't let it take up the whole screen */
+        clear: right;
+    }
+
+    figure.align-left, img.align-left {
+        float: left;
+        margin: 0.5rem 1.5rem 1rem 0; /* Top Right Bottom Left */
+        max-width: 40%
+    }
+    
+    footer {
+        border-radius: 10px 10px 0 0;
+    }
+}
+
 @media (min-width: 1400px) {
     body {
-        /* 3. Redefine to TWO columns: Main (1000px) and Sidebar (20em) */
         grid-template-columns: 1000px 20em;
         grid-template-areas:
             'header header'
@@ -160,8 +204,6 @@ main > div {
             'footer footer';
     }
 
-    /* 4. REMOVE the min-width here. Let the grid-template-columns (above) 
-          handle the sizing so it doesn't overflow. */
     main {
         min-width: 0; 
     }
@@ -190,8 +232,8 @@ ads {
     grid-area: ads;
 }
 
-bads {
-    grid-area: bads
+ads {
+    grid-area: ads
 }
 
 popular {
@@ -208,12 +250,8 @@ footer {
     max-width: 90em;
 }
 
-/**** Really small screens *****/
+
+/***** Screens NO WIDER than 700px *****/
 @media (max-width: 700px) {
-    figure.align-right, figure.align-left, img.align-right, img.align-left {
-        float: none;
-        display: block;
-        margin: 1rem auto;
-        max-width: 100%;
-    }
+
 }
