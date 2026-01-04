@@ -1,19 +1,22 @@
 body {
-    background: #b3b1d0;
-    background: #579453;
     background: #456b42;
     display: grid;
     gap: 1em;
-    grid: 'header' auto
-          'nav' auto
-          'main' 1fr
-          'ads' auto
-          'recent' auto
-          'popular' auto
-          'footer' auto
-          / 1fr;
-    max-width: 1300px;
     margin: 0 auto;
+    
+    /* 1. Explicitly define the single column for mid-size screens */
+    grid-template-columns: minmax(0, 1000px);
+    justify-content: center;
+
+    /* 2. Explicitly define the areas (removed the shorthand '/' syntax) */
+    grid-template-areas:
+        'header'
+        'nav'
+        'main'
+        'ads'
+        'recent'
+        'popular'
+        'footer';
 }
 
 div {
@@ -118,16 +121,24 @@ a:hover {
 
 /**** Media *****/
 
-@media (min-width: 70em) {
+@media (min-width: 1400px) {
     body {
+        /* 3. Redefine to TWO columns: Main (1000px) and Sidebar (20em) */
+        grid-template-columns: 1000px 20em;
+        
         grid-template-areas:
             'header header'
             'main nav'
             'main recent'
             'main ads'
             'main popular'
-            'footer footer'
-        ;
+            'footer footer';
+    }
+
+    /* 4. REMOVE the min-width here. Let the grid-template-columns (above) 
+          handle the sizing so it doesn't overflow. */
+    main {
+        min-width: 0; 
     }
     div {
         border-radius: 8px;
@@ -137,12 +148,13 @@ a:hover {
 
 header {
     grid-area: header;
-    max-width: 90em;
+
 }
 
 nav {
     grid-area: nav;
     min-width: 20em;
+    max-width: 1000px;
 }
 
 recent {
@@ -163,7 +175,7 @@ popular {
 
 main {
     grid-area: main;
-    max-width: 70em;
+    max-width: 1000px
 }
 
 footer {
@@ -172,7 +184,7 @@ footer {
 }
 
 /**** Really small screens *****/
-@media (max-width: 40em) {
+@media (max-width: 700px) {
     figure.align-right, figure.align-left, img.align-right, img.align-left {
         float: none;
         display: block;
