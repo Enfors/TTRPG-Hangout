@@ -78,8 +78,7 @@ img {
 
     /* Centering */
     display: block; /* Removes tiny gap below inline images */
-    margin: 2rem auto; /* 2rem top/bottom, auto left/right */
-    margin: 1rem auto;
+    margin: 1rem auto; /* 1rem top/bottom, auto left/right */
 
     /* Add polish */
     border-radius: 20px; /* Smooth corners */
@@ -92,10 +91,16 @@ img {
 figure.align-right, figure.align-left, img.align-right, img.align-left {
     float: none;
     display: block;
-    margin: 0 auto;
     max-width: 100%;
 }
 
+figure.align-right, img.align-right {
+    margin: 0 0 2em 2em;
+}
+
+figure.align-left, img.alignleft {
+    margin: 0 2em 2em 0;
+}
 
 /***** Captions *****/
 
@@ -200,9 +205,11 @@ footer {
     body {
         margin: 0 0.5em 0 0.5em;
     }
+
     header {
         margin: 1em 0 0 0;
     }
+
     header img {
         border-radius: 50px 50px 10px 10px;
         margin: 1em;
