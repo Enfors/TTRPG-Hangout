@@ -21,6 +21,10 @@ div {
 
 /***** Tables *****/
 
+table.maximize {
+    min-width: 100%;
+}
+
 /* Table headings, table data */
 th, td {
     padding: 5px;
