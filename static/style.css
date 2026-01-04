@@ -126,7 +126,8 @@ a:hover {
 /***** Header *****/
 
 header img.banner {
-    margin: 0;
+    margin: 0 auto; /* Keeps it centered removes the 1rem top/bottom */
+    display: block;
     border: none;
     box-shadow: none;
 }
@@ -139,6 +140,12 @@ header {
     grid-area: header;
     /* Ensure the header div itself doesn't have extra padding if it's a div */
     padding: 0;
+    /* This ensures the header itself doesn't have a hidden height */
+    line-height: 0;
+}
+
+main > div {
+    padding-top: 0.5em;
 }
 
 /**** Media *****/
