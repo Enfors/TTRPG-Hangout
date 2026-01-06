@@ -44,7 +44,7 @@ body {
 
 div {
     padding: 1em;
-    background: #fcf8ff;
+    background: #fcfff8;
 }
 
 /***** Tables *****/
@@ -137,7 +137,7 @@ a {
 
 a:hover {
     text-decoration-thickness: 2px;  /* Thicken on interaction */
-    background-color: #dcd8ff; /* Subtle highlight */
+    background-color: #dcffd8; /* Subtle highlight */
 }
 
 /***** Header *****/
