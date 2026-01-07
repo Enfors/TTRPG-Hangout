@@ -200,6 +200,17 @@ footer {
 
 /**** Media *****/
 
+@media (max-width: 699px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        width: 100%;
+        font-size: 0.8rem;
+        -webkit-overflow-scrolling; touch; /* Smooth scrolling on iOS */
+        border-right: 1px solid #ddd; /* Subtle hint where it ends */
+    }
+}
+
 /***** Screens AT LEAST 700px wide *****/
 @media (min-width: 700px) {
     body {
