@@ -200,7 +200,7 @@ footer {
 
 /**** Media *****/
 
-@media (max-width: 699px) {
+@media (max-width: 900px) {
     table {
         display: block;
         overflow-x: auto;
