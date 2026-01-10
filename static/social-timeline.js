@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                     <a href="${att.url}" target="_blank">
                                         <img src="${att.preview_url}" 
                                              alt="${att.description || 'Image'}" 
-                                             style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #eee;">
+                                             style="max-width: 500px; width: 100%; height: auto; border-radius: 8px; border: 1px solid #eee;">
                                     </a>
                                 </div>
                             `;
