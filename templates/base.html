@@ -56,6 +56,70 @@
       </div>
     </recent>
 
+    <!-- TTRPG-Hangout.social public timeline -->
+    <socialtimeline>
+      <div class="sidebar-widget">
+        <h3>Live at TTRPG-Hangout.social</h3>
+        <div id="mastodon-timeline">Loading...</div>
+        <p style="text-aligh; right; font-size: 0.8rem;">
+          <a href="https://ttrpg-hangout.social/public/local" target="_blank">View more&rarr;</a>
+        </p>
+      </div>
+
+      <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const instance = "https://ttrpg-hangout.social";
+    const container = document.getElementById("mastodon-timeline");
+    
+    // Fetch local timeline, limit to 3 posts
+    fetch(`${instance}/api/v1/timelines/public?local=true&limit=3`)
+        .then(response => response.json())
+        .then(data => {
+            container.innerHTML = "";
+            
+            data.forEach(status => {
+                // simple cleaner for the content
+                const div = document.createElement("div");
+                div.className = "toot-entry";
+                div.style.marginBottom = "1rem";
+                div.style.borderBottom = "1px solid #eee";
+                div.style.paddingBottom = "0.5rem";
+                
+                // Handle Content Warnings (CW) - Simple version: just show "CW: [Text]"
+                let content = status.content;
+                if (status.spoiler_text) {
+                    content = `<p><strong>CW: ${status.spoiler_text}</strong> <br> 
+                               <span style="font-size:0.8rem; color:#666;">(Click post to view)</span></p>`;
+                }
+
+                div.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                        <img src="${status.account.avatar}" style="width: 30px; height: 30px; border-radius: 50%;">
+                        <div style="line-height: 1.2;">
+                            <a href="${status.account.url}" style="font-weight: bold; text-decoration: none; color: inherit; font-size: 0.9rem;">
+                                ${status.account.display_name}
+                            </a>
+                        </div>
+                    </div>
+                    <div style="font-size: 0.9rem; color: #333;">
+                        <a href="${status.url}" target="_blank" style="text-decoration: none; color: inherit;">
+                            ${content}
+                        </a>
+                    </div>`;
+                container.appendChild(div);
+            });
+        })
+        .catch(err => {
+            container.innerHTML = "Currently quiet in the tavern.";
+        });
+});
+</script>
+    
+
+
+        
+    </socialtimeline>
+    
     <!-- Ads -->
     <ads>
       <div>
@@ -72,11 +136,22 @@
         </center>
       </div>
     </ads>
-  
+
     <!-- Popular -->
     <popular>
       <div>
-        (Popular articles here)
+        <h3>Popular articles</h3>
+        <ol>
+          <li>
+            <a href="/travel_and_exploration_in_rpgs.html">Travel and exploration in RPGs</a>
+          </li>
+          <li>
+            <a href="/npc_generator.html">NPC Generator</a>
+          </li>
+          <li>
+            <a href="2d6_weather_system.html">2d6 Weather System</a>
+          </li>
+        </ol>
       </div>
     </popular>
   </aside>

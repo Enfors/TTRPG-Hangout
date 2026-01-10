@@ -179,6 +179,23 @@ recent {
     grid-area: recent;
 }
 
+socialtimeline {
+    grid-area: socialtimeline;
+}
+
+/* Turn off global styles for the social timeline */
+#mastodon-timeline {
+    box-shadow: none !important;  /* Force it to override the global rule */
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+/* And turn it off for the inner parts too */
+#mastodon-timeline div {
+    box-shadow: none !important;
+}
+
 ads {
     grid-area: ads
 }
