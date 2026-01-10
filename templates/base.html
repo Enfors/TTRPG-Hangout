@@ -41,7 +41,7 @@
     <!-- Recent -->
     <recent>
       <div>
-        <h2>Recent articles</h2>
+        <h3>Recent articles</h3>
         <ul>
           <li><a href="quantity_oracle.html">Quantity Oracle</a></li>
           <li><a href="action_theme_oracle.html">Action/Theme Oracle</a></li>
@@ -59,7 +59,7 @@
     <!-- TTRPG-Hangout.social public timeline -->
     <socialtimeline>
       <div class="sidebar-widget">
-        <h3>Live at TTRPG-Hangout.social</h3>
+        <h3>Latest posts from Mastodon TTRPG-Hangout.social</h3>
         <div id="mastodon-timeline">Loading...</div>
         <p style="text-aligh; right; font-size: 0.8rem;">
           <a href="https://ttrpg-hangout.social/public/local" target="_blank">View more&rarr;</a>
@@ -71,32 +71,39 @@ document.addEventListener("DOMContentLoaded", function() {
     const instance = "https://ttrpg-hangout.social";
     const container = document.getElementById("mastodon-timeline");
     
-    // Fetch local timeline, limit to 3 posts
-    fetch(`${instance}/api/v1/timelines/public?local=true&limit=3`)
+    // Fetch local timeline, limit to 6 posts
+    fetch(`${instance}/api/v1/timelines/public?local=true&limit=6`)
         .then(response => response.json())
         .then(data => {
             container.innerHTML = "";
             
-            data.forEach(status => {
-                // simple cleaner for the content
+data.forEach(status => {
                 const div = document.createElement("div");
                 div.className = "toot-entry";
-                div.style.marginBottom = "1rem";
-                div.style.borderBottom = "1px solid #eee";
-                div.style.paddingBottom = "0.5rem";
                 
-                // Handle Content Warnings (CW) - Simple version: just show "CW: [Text]"
+                // 1. OUTER SPACING (Space between toots)
+                // "marginBottom" determines space AFTER the grey line.
+                // "paddingBottom" determines space BEFORE the grey line (below text).
+                div.style.marginBottom = "10px"; 
+                div.style.paddingBottom = "10px";
+                div.style.borderBottom = "1px solid #eee";
+                
+                // Handle Content Warnings
                 let content = status.content;
                 if (status.spoiler_text) {
-                    content = `<p><strong>CW: ${status.spoiler_text}</strong> <br> 
-                               <span style="font-size:0.8rem; color:#666;">(Click post to view)</span></p>`;
+                    content = `<p style="margin:0;"><strong>CW: ${status.spoiler_text}</strong> <br> 
+                               <span style="font-size:0.8rem; color:#666;">(Click to view)</span></p>`;
+                } else {
+                    // 2. THE P-TAG KILLER: Force all paragraphs to have 0 margin
+                    content = content.replace(/<p>/g, '<p style="margin: 0; margin-bottom: 5px;">');
                 }
+
                 div.innerHTML = `
                     <div style="display: flex; 
                                 align-items: center; 
                                 justify-content: flex-start; 
                                 text-align: left;
-                                margin-bottom: 10px;">
+                                margin-bottom: 5px;">
                         
                         <div style="width: 60px; min-width: 60px; margin-right: 15px;">
                             <img src="${status.account.avatar}" 
@@ -104,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                         border-radius: 15%; 
                                         display: block; 
                                         margin: 0 !important;
-                                        max-width: none;">
+                                        max-width: none;"> 
                         </div>
                         
                         <div style="flex-grow: 1; line-height: 1.2; text-align: left;">
@@ -121,8 +128,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                 `;
                 container.appendChild(div);
-            });
-            })
+            });            })
             .catch(err => {
             container.innerHTML = "Currently quiet in the tavern.";
             });
@@ -133,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function() {
     <!-- Ads -->
     <ads>
       <div>
-        <center><h3>Donations appreciated</h3></center>
+        <h3>Donations appreciated</h3>
         <p>
           This site does not track you or invade your privacy in any way. At the moment I'm running it at a loss,
           but I'm hoping to be able to pay for the running costs through donations so I won't have to

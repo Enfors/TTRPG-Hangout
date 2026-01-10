@@ -194,6 +194,33 @@ socialtimeline {
 /* And turn it off for the inner parts too */
 #mastodon-timeline div {
     box-shadow: none !important;
+    padding: 0 !important;
+    background: transparent;
+}
+
+/* 1. Tighten the space between toots (The space below the line) */
+.toot-entry {
+    margin-bottom: 0.5rem !important; /* Overrides the JS setting */
+    padding-bottom: 0.5rem !important;
+}
+
+/* 2. Kill the huge default margins on Mastodon text */
+/* This brings the text closer to the avatar/name */
+#mastodon-timeline p {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+/* 3. Remove the extra space above the VERY FIRST toot */
+/* This pulls the first image up closer to the "Live at..." header */
+#mastodon-timeline .toot-entry:first-child {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+/* 4. Optional: Tighten the header above the timeline if needed */
+.sidebar-widget h3 {
+    margin-bottom: 0.5rem; /* Adjust this if the header is still too high */
 }
 
 ads {
