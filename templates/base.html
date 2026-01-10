@@ -91,33 +91,43 @@ document.addEventListener("DOMContentLoaded", function() {
                     content = `<p><strong>CW: ${status.spoiler_text}</strong> <br> 
                                <span style="font-size:0.8rem; color:#666;">(Click post to view)</span></p>`;
                 }
-
                 div.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
-                        <img src="${status.account.avatar}" style="width: 30px; height: 30px; border-radius: 50%;">
-                        <div style="line-height: 1.2;">
+                    <div style="display: flex; 
+                                align-items: center; 
+                                justify-content: flex-start; 
+                                text-align: left;
+                                margin-bottom: 10px;">
+                        
+                        <div style="width: 60px; min-width: 60px; margin-right: 15px;">
+                            <img src="${status.account.avatar}" 
+                                 style="width: 60px; height: 60px; 
+                                        border-radius: 15%; 
+                                        display: block; 
+                                        margin: 0 !important;
+                                        max-width: none;">
+                        </div>
+                        
+                        <div style="flex-grow: 1; line-height: 1.2; text-align: left;">
                             <a href="${status.account.url}" style="font-weight: bold; text-decoration: none; color: inherit; font-size: 0.9rem;">
                                 ${status.account.display_name}
                             </a>
                         </div>
                     </div>
-                    <div style="font-size: 0.9rem; color: #333;">
+                    
+                    <div style="font-size: 0.9rem; color: #333; text-align: left; line-height: 1.4;">
                         <a href="${status.url}" target="_blank" style="text-decoration: none; color: inherit;">
                             ${content}
                         </a>
-                    </div>`;
+                    </div>
+                `;
                 container.appendChild(div);
             });
-        })
-        .catch(err => {
+            })
+            .catch(err => {
             container.innerHTML = "Currently quiet in the tavern.";
+            });
         });
-});
-</script>
-    
-
-
-        
+        </script>
     </socialtimeline>
     
     <!-- Ads -->
