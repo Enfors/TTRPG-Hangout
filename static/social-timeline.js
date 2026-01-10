@@ -9,6 +9,13 @@ document.addEventListener("DOMContentLoaded", function() {
             container.innerHTML = "";
             
             data.forEach(status => {
+                // 0. RESPECT PRIVACY:
+                // If the user has opted out of indexing/discovery, skip them.
+                // (Note: Some instances use 'noindex', some use 'discoverable'. We check both.
+                if (status.account.noindex === true || status.account.discoverable === false) {
+                    return;
+                }
+                
                 const div = document.createElement("div");
                 div.className = "toot-entry";
                 
