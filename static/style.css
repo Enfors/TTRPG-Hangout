@@ -69,6 +69,12 @@ tr:nth-child(even) {
     background-color: #e8f0e0;
 }
 
+/***** Headings *****/
+
+main h2, main h3, main h4 {
+    clear: both;
+}
+
 /***** Images *****/
 
 img {
