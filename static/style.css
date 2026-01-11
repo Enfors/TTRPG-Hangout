@@ -195,6 +195,10 @@ socialtimeline {
     background: transparent;
     border: none;
     padding: 0;
+    a {
+        overflow-wrap: anywhere; /* Modern fix */
+        word-break: break-word;  /* For old browsers */
+    }
 }
 
 /* And turn it off for the inner parts too */
