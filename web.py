@@ -24,8 +24,11 @@ def article(article_file_name):
         article_file_name = article_file_name[:-5]
 
     html_file_name = article_file_name + ".html"
-        
-    html, title = read_html_and_title(html_file_name)
+
+    try:
+        html, title = read_html_and_title(html_file_name)
+    except FileNotFoundError:
+        abort(404)
 
     return render_template("article.html", html=html, title=title)
 
