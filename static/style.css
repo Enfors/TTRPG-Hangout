@@ -88,10 +88,10 @@ img {
 
     /* Add polish */
     border-radius: 20px; /* Smooth corners */
-    box-shadow: 0 4px 30px rgba(0, 4, 0, 0.3); /* Soft shadow */
+    box-shadow: 0 4px 10px rgba(0, 4, 0, 0.4); /* Soft shadow */
 
     /* Optional: Border to define edges on white backgrounds */
-    border: 1px solid #e0e0e0;
+    border: 1px solid #e0f0e0;
 }
 
 figure.align-right, figure.align-left, img.align-right, img.align-left {
@@ -173,6 +173,13 @@ header {
 
 main > div { /* main > div means it only affects top level divs under main */
     padding-top: 0.5em;
+}
+
+/* Notes */
+.note {
+    background: #e0ece0;
+    font-size: 0.9em;
+    font-style: italic;
 }
 
 nav {
