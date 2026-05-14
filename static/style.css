@@ -33,6 +33,14 @@ body {
         'main'
         'sidebar'
         'footer';
+
+    /**** Font and text accessibility ****/
+    /* Uses the native OS sans-serif font */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+    /* Improves tracking and spacing (accessibility) */
+    line-height: 1.6;
+    letter-spacing: 0.02em;
 }
 
 .sidebar {
