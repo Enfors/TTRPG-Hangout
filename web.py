@@ -1,4 +1,4 @@
-from flask import Flask, abort, render_template, send_from_directory
+from flask import Flask, abort, render_template, send_from_directory, Response
 import os
 
 from bs4 import BeautifulSoup
@@ -16,6 +16,14 @@ def start():
     toc_html = read_html(TOC_FILE_NAME)
         
     return render_template("start.html", intro_html=intro_html, toc_html=toc_html)
+
+@app.route("/atom.xml")
+def atom():
+    with open(os.path.join(ARTICLE_DIR, "atom.xml")) as atom_file:
+        xml_content = atom_file.read()
+
+    # Return it with the correct MIME type
+    return Response(xml_content, mimetype="application/atom.xml")
 
 @app.route("/<string:article_file_name>")
 def article(article_file_name):
