@@ -25,6 +25,11 @@ def atom():
     return send_from_directory(ARTICLE_DIR, "atom.xml",
                                mimetype="application/atom+xml")
 
+@app.route("/favicon.ico")
+def favicon():
+    return send_from_directory(IMAGES_DIR, "favicon.ico",
+                               mimetype="image/vnd.microsoft.icon")
+
 @app.route("/<string:article_file_name>")
 def article(article_file_name):
 
