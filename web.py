@@ -1,4 +1,4 @@
-from flask import Flask, abort, render_template, send_from_directory, Response
+from flask import Flask, abort, render_template, send_from_directory, Response, send_file
 import os
 
 from bs4 import BeautifulSoup
@@ -19,11 +19,11 @@ def start():
 
 @app.route("/atom.xml")
 def atom():
-    with open(os.path.join(ARTICLE_DIR, "atom.xml")) as atom_file:
-        xml_content = atom_file.read()
-
-    # Return it with the correct MIME type
-    return Response(xml_content, mimetype="application/atom.xml")
+    # Have Flask handle MIME type and ETags automatically.
+    # This means that feed readers will be able to say "Send me atom.xml, but only
+    # if it has been updated since I got it last time."
+    return send_from_directory(ARTICLE_DIR, "atom.xml",
+                               mimetype="application/atom+xml")
 
 @app.route("/<string:article_file_name>")
 def article(article_file_name):
