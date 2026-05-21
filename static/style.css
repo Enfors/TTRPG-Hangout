@@ -274,6 +274,16 @@ footer {
     border-radius: 0;
 }
 
+/**** Solo-RPG HTML exports ****/
+
+.solo-rpg-session {
+    color:        #9090d0;
+    background:   #001138;
+    font-family:  monospace;
+    white-space:  pre-wrap;
+    font-size:    1.1em;
+}
+
 /**** Media *****/
 
 @media (max-width: 900px) {
