@@ -31,7 +31,7 @@
   </header>
   <!-- The page -->
   <main>
-    <div>
+
       <!-- The header -->
       {% block header %}{% endblock %}
       <!-- Flash messages -->
@@ -39,7 +39,7 @@
       <div class="flash">{{ message }}</div>
       {% endfor %}
         {% block content %}{% endblock %}
-    </div>
+
   </main>
 
   <!-- The sidebar -->
@@ -56,7 +56,8 @@
             The Mastodon instance associated with this site.
           </li>
           <li><a href="/atom.xml">Subscribe</a> to the Atom feed.</li>
-          <li><a href="/about_ttrpg_hangout.html">About</a> this site and its author.</li>
+          <li><a href="/about_ttrpg_hangout.html">About</a> this site, its author,
+            and its running costs.</li>
         </ul>
       </div>
     </nav>
@@ -96,9 +97,8 @@
         <h3>Donations appreciated</h3>
         <p>
           This site does not track you or invade your privacy in any way. At the moment I'm running it at a loss,
-          but I'm hoping to be able to pay for the running costs through donations so I won't have to
-          resort to ads in the future. If you would like to support me with a small donation, it would be greatly
-          appreciated.
+          but I'm hoping to be able to pay for the running costs through donations. If you would like to support
+          me with a small donation, it would be greatly appreciated but not expected.
         </p>
         <center>
           <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>

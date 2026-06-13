@@ -39,11 +39,14 @@ def article(article_file_name):
     html_file_name = article_file_name + ".html"
 
     try:
-        html, title = read_html_and_title(html_file_name)
+        article_html, title = read_html_and_title(html_file_name)
     except FileNotFoundError:
         abort(404)
 
-    return render_template("article.html", html=html, title=title)
+    transp_footer_html = read_html("transparency_footer_ttrpg_hangout.html")
+
+    return render_template("article.html", article_html=article_html, title=title,
+                           transp_footer_html=transp_footer_html)
 
 # This route mimics PythonAnywhere's static file serving.
 # It allows your local Flask to serve files from the "images" folder.
