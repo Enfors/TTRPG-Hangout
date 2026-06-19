@@ -246,7 +246,7 @@ def gen_npc_personality():
                "Neuroticism"]
     for aspect in aspects:
         aspect_val = random.randint(1, 7)
-        descriptor = random.choice(descriptors[aspect][aspect_val])
+        descriptor = random.choice(descriptors[aspect][aspect_val - 1])
         html += f"<tr><td>{aspect}</td><td align=right>{aspect_val}</td><td>{descriptor}</td></tr>\n"
 
     html += "</table>\n"
