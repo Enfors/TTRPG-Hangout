@@ -1,4 +1,4 @@
-from flask import Flask, abort, render_template, send_from_directory, Response, send_file
+from flask import Flask, abort, render_template, request, send_from_directory, Response, send_file
 import json, os, random
 
 from bs4 import BeautifulSoup
@@ -116,6 +116,80 @@ def gen_action_theme():
 
     return f"<p><strong>Result:</strong> {action} / {theme}</p>\n"
 
+@app.route("/gen_yes_no_oracle", methods=["POST"])
+def gen_yes_no_oracle():
+    # Tuple format: (Max Roll to hit this result, "Text", CSS Column Index)
+    yes_no_data = {
+        6: [(2, "No and", 3), (3, "No", 4), (4, "No but", 5), (7, "Yes but", 6), (16, "Yes", 7), (20, "Yes and", 8)],
+        5: [(2, "No and", 3), (4, "No", 4), (5, "No but", 5), (8, "Yes but", 6), (16, "Yes", 7), (20, "Yes and", 8)],
+        4: [(2, "No and", 3), (5, "No", 4), (6, "No but", 5), (9, "Yes but", 6), (17, "Yes", 7), (20, "Yes and", 8)],
+        3: [(2, "No and", 3), (6, "No", 4), (7, "No but", 5), (9, "Yes but", 6), (17, "Yes", 7), (20, "Yes and", 8)],
+        2: [(2, "No and", 3), (6, "No", 4), (8, "No but", 5), (10, "Yes but", 6), (17, "Yes", 7), (20, "Yes and", 8)],
+        1: [(3, "No and", 3), (7, "No", 4), (9, "No but", 5), (11, "Yes but", 6), (17, "Yes", 7), (20, "Yes and", 8)],
+        0: [(3, "No and", 3), (8, "No", 4), (10, "No but", 5), (12, "Yes but", 6), (17, "Yes", 7), (20, "Yes and", 8)],
+        -1: [(3, "No and", 3), (9, "No", 4), (11, "No but", 5), (13, "Yes but", 6), (17, "Yes", 7), (20, "Yes and", 8)],
+        -2: [(3, "No and", 3), (10, "No", 4), (12, "No but", 5), (14, "Yes but", 6), (18, "Yes", 7), (20, "Yes and", 8)],
+        -3: [(3, "No and", 3), (11, "No", 4), (13, "No but", 5), (14, "Yes but", 6), (18, "Yes", 7), (20, "Yes and", 8)],
+        -4: [(3, "No and", 3), (11, "No", 4), (14, "No but", 5), (15, "Yes but", 6), (18, "Yes", 7), (20, "Yes and", 8)],
+        -5: [(4, "No and", 3), (12, "No", 4), (15, "No but", 5), (16, "Yes but", 6), (18, "Yes", 7), (20, "Yes and", 8)],
+        -6: [(4, "No and", 3), (13, "No", 4), (16, "No but", 5), (17, "Yes but", 6), (18, "Yes", 7), (20, "Yes and", 8)],
+    }
+
+    # Get the user input and roll the dice
+    modifier = int(request.form.get("modifier", 0))
+    roll = random.randint(1, 20)
+
+    if (roll == 1 or roll == 20): # If random event
+
+        if (roll == 1):
+            event_polarity = "Negative"
+        else:
+            event_polarity = "Positive"
+
+        event_roll = random.randint(1, 4)
+        event_type = ["PC", "NPC", "faction", "plot"][event_roll - 1]
+
+        css_injection = f"""
+        <style>
+            #oracle-random-event tbody tr:nth-child({event_roll}) > *:nth-child(2) {{
+                background-color: #b3d0b1 !important;
+                box-shadow: inset 2px 2px 10px rgba(0, 0, 0, 0.8) !important;
+                font-weight: bold;
+            }}
+        </style>
+        """
+        return f"<p><strong>Rolled {roll}, then {event_roll}:</strong> "\
+            f"{event_polarity} {event_type} event</p>\n{css_injection}"
+
+    # It's not a random event (roll isn't 1 or 20)
+        
+    # Calculate the CSS row
+    target_row = 7 - modifier
+
+    # Evaluate roll using our yes/no data
+    row_data = yes_no_data.get(modifier, [])
+    result_text = "Error"
+    target_col = 0
+
+    for max_val, text, col_index in row_data:
+        if roll <= max_val:
+            result_text = text
+            target_col = col_index
+            break
+
+    # Generate the response with dynamic CSS
+    css_injection = f"""
+    <style>
+        #oracle-yes-no tbody tr:nth-child({target_row}) > *:nth-child({target_col}) {{
+            background-color: #b3d0b1 !important;
+            box-shadow: inset 2px 2px 10px rgba(0, 0, 0, 0.8) !important;
+            font-weight: bold;
+        }}
+    </style>
+    """
+    
+    return f"<p><strong>Rolled {roll}:</strong> {result_text}</p>\n{css_injection}"
+    
 # Utility functions
 def read_html(file_name):
     with open(os.path.join(ARTICLE_DIR, file_name)) as html_file:
