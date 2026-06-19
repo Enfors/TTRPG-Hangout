@@ -197,6 +197,15 @@ div.sourceCode {
     background: #e4ffe0 !important;
 }
 
+/* HTMX boxes */
+div.htmx-box {
+    box-shadow: 0px 0px 5px rgba(0, 20, 0, 0.8);
+}
+
+div.htmx-result {
+    box-shadow: none;
+}
+
 nav {
     grid-area: unset;
     min-width: 0;
@@ -315,14 +324,29 @@ footer {
         margin: 1em;
     }
 
-    div {
+    /* Target main content blocks, the sidebar container itself, 
+       any child divs inside the sidebar, and explicit widget classes 
+    */
+    main > div, 
+    .sidebar > *,
+    footer {
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8); /* Soft shadow */
+    }
+    
+    div,
+    .sidebar > * {
         border-radius: 10px;
+    }
+    
+    div.htmx-result {
+        box-shadow: none !important;
+        background: transparent; 
+        padding: 0; 
     }
 
     figure.align-right, img.align-right {
         float: right;
-        max-width: 40%; /* Don't let it take up the whole screen */
+        max-width: 40%;
         clear: right;
     }
 
