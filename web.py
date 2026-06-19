@@ -189,7 +189,97 @@ def gen_yes_no_oracle():
     """
     
     return f"<p><strong>Rolled {roll}:</strong> {result_text}</p>\n{css_injection}"
+
+@app.route("/gen_npc_personality", methods=["POST"])
+def gen_npc_personality():
+
+    descriptors = {
+        "Openness": [
+            ["Authoritarian", "Intolerant", "Cynical", "Narrow-minded"],
+            ["Inflexible", "Pessimistic", "Hard-headed", "Prejudiced"],
+            ["Dogmatic", "Conservative", "Stubborn", "Traditional"],
+            ["Skeptical", "Resistant", "Realistic", "Pragmatic"],
+            ["Unbiased", "Receptive", "Open-minded", "Curious"],
+            ["Philosophical", "Flexible", "Creative", "Inquisitive"],
+            ["Tolerant", "Progressive", "Optimistic", "Adventurous"]
+        ],
+        "Conscientiousness": [
+            ["Negligent", "Irresponsible", "Careless", "Lazy"],
+            ["Hedonistic", "Impulsive", "Disorganized", "Unreliable"],
+            ["Procrastinating", "Impatient", "Unorganized", "Indecisive"],
+            ["Distracted", "Casual", "Practical", "Diligent"],
+            ["Punctual", "Patient", "Responsible", "Dependable"],
+            ["Disciplined", "Thorough", "Efficient", "Goal-oriented"],
+            ["Ambitious", "Persevering", "Methodical", "Perfectionist"]
+        ],
+        "Extraversion": [
+            ["Solitary", "Reclusive", "Private", "Withdrawn"],
+            ["Reserved", "Shy", "Introspective", "Independent"],
+            ["Submissive", "Reflective", "Quiet", "Serious"],
+            ["Aloof", "Contemplative", "Ambivert", "Easy-going"],
+            ["Outgoing", "Sociable", "Expressive", "Lively"],
+            ["Jovial", "Cheerful", "Listener", "Bubbly"],
+            ["Energetic", "Passionate", "Flamboyant", "Flirtatious"]
+        ],
+        "Agreeableness": [
+            ["Cruel", "Greedy", "Deceptive", "Manipulative"],
+            ["Selfish", "Boastful", "Jealous", "Cynical"],
+            ["Rude", "Sarcastic", "Vain", "Competitive"],
+            ["Arrogant", "Argumentative", "Polite", "Diplomatic"],
+            ["Cooperative", "Trusting", "Honest", "Loyal"],
+            ["Kind", "Caring", "Compassionate", "Generous"],
+            ["Humorous", "Forgiving", "Charming", "Altruistic"]
+        ],
+        "Neuroticism": [
+            ["Serene", "Stoic", "Hardy", "Poised"],
+            ["Grounded", "Calm", "Adaptable", "Sensible"],
+            ["Confident", "Focused", "Stable", "Resilient"],
+            ["Relaxed", "Concerned", "Restless", "Fickle"],
+            ["Wary", "Tense", "Anxious", "Vulnerable"],
+            ["Sensitive", "Irritable", "Moody", "Nervous"],
+            ["Insecure", "Self-critical", "Depressed", "Panicky"]
+        ]
+    }
+
+    html = "<table>\n<tr><th>Aspect</th><th>Value</th><th>Descriptor</th></tr>\n"
+    aspects = ["Openness", "Conscientiousness", "Extraversion", "Agreeableness",
+               "Neuroticism"]
+    for aspect in aspects:
+        aspect_val = random.randint(1, 7)
+        descriptor = random.choice(descriptors[aspect][aspect_val])
+        html += f"<tr><td>{aspect}</td><td align=right>{aspect_val}</td><td>{descriptor}</td></tr>\n"
+
+    html += "</table>\n"
+
+    return html
+
+@app.route("/gen_agenda", methods=["POST"])
+def gen_agenda():
+    goal = [
+        "Aquire", "Avenge", "Betray", "Conceal", "Conquer",
+        "Destroy", "Discover", "Escape", "Expand", "Explore",
+        "Gather", "Glorify", "Infiltrate", "Lead", "Learn",
+        "Oppose", "Prevent", "Reconcile", "Restore", "Worship"
+    ]
+
+    focus = [
+        "Adversary", "Artefact", "Beast", "Child", "Enemy",
+        "Idea", "Knowledge", "Location", "Love", "Neighbor",
+        "NPC", "Parent", "PC", "Relationship", "Relative",
+        "Revenge", "Reward", "Ruler", "Structure", "Wealth"
+    ]
+
+    obstacle = [
+        "Alliance", "Conflict", "Conflicting interests", "Criminal past", "Distance",
+        "Duty", "Family", "Forbidden love", "Health", "Honor",
+        "Hostility", "Lack of information", "Lack of resources", "Law", "Love",
+        "Mysterious circumstances", "Oath", "Opposing faction", "Pursuers", "Time"
+    ]
+
+    html = "%s %s, but %s" % (random.choice(goal), random.choice(focus), random.choice(obstacle))
     
+    return f"<p><strong>Agenda:</strong> {html}</p>"
+
 # Utility functions
 def read_html(file_name):
     with open(os.path.join(ARTICLE_DIR, file_name)) as html_file:
