@@ -57,6 +57,35 @@ div {
 
 /***** Tables *****/
 
+table {  /* The purpose of this block is to give tables rounded corners. */
+    /* 1. Break the collapse so border-radius is allowed */
+    border-collapse: separate; 
+    
+    /* 2. Remove the gaps between cells that 'separate' creates */
+    border-spacing: 0; 
+    
+    /* 3. Apply your rounded corners */
+    border-radius: 8px; 
+    
+    /* 4. Clip the square child cells so they don't poke out of the rounded corners */
+    overflow: hidden; 
+    
+    /* 5. Add an outer border to frame the whole table */
+    border: 1px solid #686; 
+}
+
+/* Add vertical dividers between columns */
+th:not(:first-child),
+td:not(:first-child) {
+    border-left: 1px solid #686; /* Change this hex code to match your preferred border color */
+}
+
+/* Add horizontal dividers between rows */
+td {
+    border-top: 1px solid #686;
+}
+
+
 table.maximize {
     min-width: 100%;
 }
@@ -70,11 +99,23 @@ th, td {
 /* Table headings */
 th {
     text-align: left;
-    background-color: #b3d0b1;
+    background-color: #90c090;
 }
 
-tr:nth-child(even) {
-    background-color: #e8f0e0;
+/* Table rows */
+/* This is to ignore the even/odd class which pandoc explicitly sets incorrectly */
+table tr.odd,
+table tr.even {
+    background-color: transparent;
+}
+
+/* Set the even/odd table rows */
+tbody tr:nth-child(odd) {
+    background-color: #f0f8f0; /* Lighter green */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #d0e8d0; /* Darker green */
 }
 
 /***** Headings *****/
@@ -188,18 +229,22 @@ main > div { /* main > div means it only affects top level divs under main */
     background: #e0ece0;
     font-size: 0.9em;
     font-style: italic;
+    border: 1px solid #686;
+    box-shadow: 0px 0px 5px rgba(0, 20, 0, 0.4);
 }
 
 /* Code */
 div.sourceCode {
     /* box-shadow: none !important; */
-    box-shadow: 0px 0px 5px rgba(0, 20, 0, 0.8);
+    box-shadow: 0px 0px 5px rgba(0, 20, 0, 0.4);
     background: #e4ffe0 !important;
 }
 
 /* HTMX boxes */
 div.htmx-box {
-    box-shadow: 0px 0px 5px rgba(0, 20, 0, 0.8);
+    background: #f0f8f0;
+    border: 1px solid #686;
+    box-shadow: 0px 0px 5px rgba(0, 20, 0, 0.4);
 }
 
 div.htmx-result {
