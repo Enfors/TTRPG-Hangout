@@ -17,6 +17,80 @@ MANIFEST_PATH = os.path.join(ARTICLE_DIR, MANIFEST_FILE_NAME)
 with open (MANIFEST_PATH, 'r') as f:
     manifest_data = json.load(f)
 
+######## Data
+
+# NPC Appearance generator
+
+APPEARANCE_DATA = {
+    "height": [
+        (1, "Very short"), (3, "Short"), (7, "Somewhat short"),
+        (13, "Average"), (17, "Somewhat tall"), (19, "Tall"), (20, "Very tall")
+    ],
+    
+    "size": [
+        # Format: (Max Roll, "Text", Size Mod)
+        (1, "Very small", -3), (3, "Small", -2), (7, "Somewhat small", -1),
+        (13, "Average", 0), (17, "Somewhat large", 1), (19, "Large", 2), (20, "Very large", 3)
+    ],
+    
+    "proportions": [
+        # Format: (Max Roll, "Text") 
+        (1, "Extremely small"), (2, "Very small"), (3, "Small"),
+        (4, "Somewhat small"), (5, "Average"), (6, "Somewhat large"),
+        (7, "Large"), (8, "Very large"), (99, "Extremely large") 
+    ],
+    
+    "eye_color": [
+        (2, "Light blue"), (4, "Blue"), (5, "Grey"), (7, "Brown"),
+        (9, "Dark brown"), (10, "Green")
+    ],
+    
+    "skin_color": [
+        (5, "Western"), (7, "African"), (8, "Asian")
+    ],
+    
+    "hair_color": [
+        (2, "Blonde"), (5, "Brown"), (7, "Auburn"), (8, "Red"), (10, "Dark")
+    ],
+    
+    "hair_length": [
+        (2, "short"), (3, "shoulder length"), (5, "long"), (6, "very long")
+    ],
+    
+    "hair_style": [
+        (2, "loose"), (4, "pony tail"), (5, "bun"), (7, "braided"),
+        (9, "half-up, half-down"), (10, "dreadlocks")
+    ],
+    
+    "facial_hair": [
+        (5, "None"), (7, "Beard"), (8, "Mustache"), (10, "Sideburns"),
+        (11, "Mutton chops"), (12, "Goatee")
+    ]
+}
+
+SPECIAL_FEATURES = [
+    "Facial scar", 
+    "Facial birth mark", 
+    "Piercings", 
+    "Tattoos",
+    "Prominent nose", 
+    "Distinctive eyebrows", 
+    "Freckles", 
+    "Thin lips",
+    "Full lips", 
+    "High cheekbones", 
+    "Round face", 
+    "Piercing gaze",
+    "Wide nose", 
+    "Protruding ears", 
+    "Cleft chin", 
+    "Deep dimples",
+    "Pockmarked skin", 
+    "Square jaw", 
+    "Missing tooth", 
+    "Broken/misshaped nose"
+]
+    
 # Routes
 @app.route("/")
 def start():
@@ -241,7 +315,7 @@ def gen_npc_personality():
         ]
     }
 
-    html = "<table>\n<tr><th>Aspect</th><th>Value</th><th>Descriptor</th></tr>\n"
+    html = "<table>\n<thead><tr><th>Aspect</th><th>Value</th><th>Descriptor</th></tr></thead>\n"
     aspects = ["Openness", "Conscientiousness", "Extraversion", "Agreeableness",
                "Neuroticism"]
     for aspect in aspects:
@@ -279,6 +353,94 @@ def gen_agenda():
     html = "%s %s, but %s" % (random.choice(goal), random.choice(focus), random.choice(obstacle))
     
     return f"<p><strong>Agenda:</strong> {html}</p>"
+
+@app.route("/gen_npc_appearance", methods=["POST"])
+def gen_npc_appearance():
+    detail_level = request.form.get("detail_level")
+    allow_facial_hair = request.form.get("allow_facial_hair") == "on"
+    
+    html = "<table>\n<thead><th>Aspect</th><th>Appearance</th></tr></thead>\n"
+
+    # Height
+    height = get_appearance_text("height", random.randint(1, 20))
+    html += gen_table_row(["Height", height])
+
+    # If we want size
+    if (detail_level == "size" or detail_level == "proportions"):
+        size_roll = random.randint(1, 20)
+        for max_val, text, size_mod in APPEARANCE_DATA["size"]:
+            if size_roll <= max_val:
+                size = text
+                #print(f"size_mod: {size_mod}")
+                break;
+
+        html += gen_table_row(["Size", size])
+
+        # If we want romantic proportions
+        if (detail_level == "proportions"):
+            for part in ["Chest", "Waist", "Bottom"]:
+                part_roll = random.randint(1, 4) + random.randint(1, 4) + size_mod
+                #print(f"{part} roll: {part_roll}")
+                part_text = get_appearance_text("proportions", part_roll)
+                html += gen_table_row([part, part_text])
+
+    # Eye color
+    eye_color = get_appearance_text("eye_color", random.randint(1, 10))
+    html += gen_table_row(["Eye color", eye_color])
+
+    # Hair color
+    hair_color_roll = random.randint(1, 8)
+    hair_color = get_appearance_text("hair_color", hair_color_roll)
+    html += gen_table_row(["Hair color", hair_color])
+
+    # Skin color
+    skin_color_roll = random.randint(1, 8)
+    skin_color = get_appearance_text("skin_color", skin_color_roll)
+    html += gen_table_row(["Skin color", skin_color])
+
+    # Hair color
+    if (skin_color_roll > 5):  # If African or Asian skin color
+        hair = "Dark"
+    else:
+        hair = get_appearance_text("hair_color", random.randint(1, 10))
+
+    # Hair length
+    hair_length_roll = random.randint(1, 6)
+    hair += ", " + get_appearance_text("hair_length", hair_length_roll)
+
+    # Long hair style
+    if hair_length_roll > 3:  # If long hair
+        hair += ", " + get_appearance_text("hair_style", random.randint(1, 10))
+
+    html += gen_table_row(["Hair", hair])
+
+    # Facial hair
+    if allow_facial_hair:
+        facial_hair = get_appearance_text("facial_hair", random.randint(1, 12))
+        html += gen_table_row(["Facial hair", facial_hair])
+
+    # Special features
+    html += gen_table_row(["Special features", random.choice(SPECIAL_FEATURES)])
+    
+    html += "</table>\n"
+
+    return html
+
+def get_appearance_text(aspect, roll):
+    data = APPEARANCE_DATA[aspect]
+    
+    for max_val, text in data:
+        if roll <= max_val:
+            return text
+    return f"(Broken table - roll: {roll})"
+
+def gen_table_row(row):
+    output = ""
+    
+    for col in row:
+        output += f"<td>{col}</td>"
+
+    return f"<tr>{output}</tr>\n"
 
 # Utility functions
 def read_html(file_name):
