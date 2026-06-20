@@ -388,11 +388,6 @@ def gen_npc_appearance():
     eye_color = get_appearance_text("eye_color", random.randint(1, 10))
     html += gen_table_row(["Eye color", eye_color])
 
-    # Hair color
-    hair_color_roll = random.randint(1, 8)
-    hair_color = get_appearance_text("hair_color", hair_color_roll)
-    html += gen_table_row(["Hair color", hair_color])
-
     # Skin color
     skin_color_roll = random.randint(1, 8)
     skin_color = get_appearance_text("skin_color", skin_color_roll)
