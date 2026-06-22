@@ -55,69 +55,45 @@ div {
     background: #fcfff8;
 }
 
-/***** Tables *****/
+/***** Tables (Global Mobile-First Base) *****/
 
-table {  /* The purpose of this block is to give tables rounded corners. */
-    /* 1. Break the collapse so border-radius is allowed */
-    border-collapse: separate; 
+table {
+    /* Rule 1: Scrollable if they don't fit */
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     
-    /* 2. Remove the gaps between cells that 'separate' creates */
-    border-spacing: 0; 
-    
-    /* 3. Apply your rounded corners */
-    border-radius: 8px; 
-    
-    /* 4. Clip the square child cells so they don't poke out of the rounded corners */
-    overflow: hidden; 
-    
-    /* 5. Add an outer border to frame the whole table */
-    border: 1px solid #686; 
+    /* Strip outer frames for mobile so scrolling is seamless */
+    border: none;
+    border-radius: 0;
+    border-collapse: collapse;
 }
-
-/* Add vertical dividers between columns */
-th:not(:first-child),
-td:not(:first-child) {
-    border-left: 1px solid #686; /* Change this hex code to match your preferred border color */
-}
-
-/* Add horizontal dividers between rows */
-td {
-    border-top: 1px solid #686;
-}
-
 
 table.maximize {
-    min-width: 100%;
+    /* Rule 2: Respected in all resolutions */
+    width: 100%;
 }
 
 /* Table headings, table data */
 th, td {
     padding: 5px;
-    /* border-bottom: 1px solid #ddd; */
 }
 
-/* Table headings */
 th {
     text-align: left;
     background-color: #90c090;
 }
 
-/* Table rows */
-/* This is to ignore the even/odd class which pandoc explicitly sets incorrectly */
-table tr.odd,
-table tr.even {
-    background-color: transparent;
-}
-
 /* Set the even/odd table rows */
-tbody tr:nth-child(odd) {
-    background-color: #f0f8f0; /* Lighter green */
-}
+table tr.odd, table tr.even { background-color: transparent; }
+tbody tr:nth-child(odd) { background-color: #f0f8f0; }
+tbody tr:nth-child(even) { background-color: #d0e8d0; }
 
-tbody tr:nth-child(even) {
-    background-color: #d0e8d0; /* Darker green */
+/* Simple bottom border to separate rows on mobile */
+td {
+    border-bottom: 1px solid #686;
 }
-
 /***** Headings *****/
 
 main h2, main h3, main h4, main h5, main h6 {
@@ -343,19 +319,9 @@ footer {
 
 /**** Media *****/
 
-@media (max-width: 900px) {
-    table {
-        display: block;
-        overflow-x: auto;
-        width: 100%;
-        font-size: 0.8rem;
-        -webkit-overflow-scrolling; touch; /* Smooth scrolling on iOS */
-        border-right: 1px solid #ddd; /* Subtle hint where it ends */
-    }
-}
 
-/***** Screens AT LEAST 700px wide *****/
-@media (min-width: 700px) {
+/***** Screens AT LEAST 900px wide *****/
+@media (min-width: 900px) { /* Medium and large screens */
     body {
         margin: 0 0.5em 0 0.5em;
     }
@@ -369,6 +335,36 @@ footer {
         margin: 1em;
     }
 
+    /***** Tables for @media (min-width: 900px) *****/
+    table {
+        /* Restores native table physics and smart column stretching */
+        display: table; 
+        width: max-content;
+        max-width: 100%;
+        
+        /* Rule 3: Rounded corners and borders */
+        border-collapse: separate; 
+        border-spacing: 0; 
+        border-radius: 8px; 
+        overflow: hidden; /* This clips the corners */
+        border: 1px solid #686; 
+    }
+
+    table.maximize {
+        /* Rule 2: Respected on desktop */
+        width: 100%; 
+    }
+
+    /* Desktop internal column/row borders */
+    th:not(:first-child),
+    td:not(:first-child) {
+        border-left: 1px solid #686; 
+    }
+
+    td {
+        border-top: 1px solid #686;
+        border-bottom: none; /* Remove the mobile row divider */
+    }
     /* Target main content blocks, the sidebar container itself, 
        any child divs inside the sidebar, and explicit widget classes 
     */
