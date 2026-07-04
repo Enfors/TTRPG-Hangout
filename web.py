@@ -90,7 +90,7 @@ SPECIAL_FEATURES = [
     "Missing tooth", 
     "Broken/misshaped nose"
 ]
-    
+
 # Routes
 @app.route("/")
 def start():
@@ -421,6 +421,13 @@ def gen_npc_appearance():
 
     return html
 
+@app.route("/gen_chemistry", methods=["POST"])
+def gen_chemistry():
+    chemistry = random.choice(["No chemistry", "Slow burn", "There is chemistry"])
+
+    return f"<p><strong>Result:</strong> {chemistry}</p>\n"
+
+# Generator utility functions
 def get_appearance_text(aspect, roll):
     data = APPEARANCE_DATA[aspect]
     
