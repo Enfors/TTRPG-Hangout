@@ -330,7 +330,7 @@ def gen_npc_personality():
 @app.route("/gen_agenda", methods=["POST"])
 def gen_agenda():
     goal = [
-        "Aquire", "Avenge", "Betray", "Conceal", "Conquer",
+        "Acquire", "Avenge", "Betray", "Conceal", "Conquer",
         "Destroy", "Discover", "Escape", "Expand", "Explore",
         "Gather", "Glorify", "Infiltrate", "Lead", "Learn",
         "Oppose", "Prevent", "Reconcile", "Restore", "Worship"
