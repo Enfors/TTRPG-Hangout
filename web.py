@@ -91,6 +91,53 @@ SPECIAL_FEATURES = [
     "Broken/misshaped nose"
 ]
 
+# Secret generator
+
+SECRET_DATA = {
+    "secret_type": [
+        "Murder or violence",
+        "Theft or embezzlement",
+        "Sordid or criminal past",
+        "Forbidden love or relation",
+        "Dark pact or supernatural bargain",
+        "Forgery or illicit trade",
+        "Betrayal or broken oath",
+        "Treason or secret identity",
+        "Hidden or unholy alliance",
+        "Curse or magical affliction",
+        "Heresy or forbidden belief",
+        "Forbidden knowledge or dangerous discovery"
+    ],
+    "relates_to": [
+        "Themself or family member",
+        "Friend or ally",
+        "Leader or neighbor",
+        "Stranger or other person",
+        "Faction or cult",
+        "Artifact or magical item",
+        "Enemy or opponent",
+        "Recent or historical event",
+        "Monstrous or supernatural entity",
+        "Location or business",
+        "Settlement or region",
+        "Religion or deity"
+    ],
+    "complication": [
+        "Innocent victim",
+        "It was unintentional",
+        "Blackmail",
+        "Feelings of guilt",
+        "Requires continuous misdeeds",
+        "Secret is costly to maintain",
+        "Violates core belief or oath",
+        "Unstable accomplice",
+        "Evidence has gone missing",
+        "Secret-keeper wants to reveal truth",
+        "Someone suspects secret-keeper",
+        "Someone accuses secret-keeper"
+    ]
+}
+
 # Routes
 @app.route("/")
 def start():
@@ -426,6 +473,21 @@ def gen_chemistry():
     chemistry = random.choice(["No chemistry", "Slow burn", "There is chemistry"])
 
     return f"<p><strong>Result:</strong> {chemistry}</p>\n"
+
+@app.route("/gen_secret", methods=["POST"])
+def gen_secret():
+    html = "<ul>"
+
+    for aspect in [["Secret type", "secret_type"],
+                   ["Relates to", "relates_to"],
+                   ["Complication", "complication"]]:
+        heading, key = aspect
+        val = random.choice(SECRET_DATA[key])
+        html += f"<li><strong>{heading}:</strong> {val}</li>\n"
+
+    html += "</ul>\n"
+        
+    return html
 
 # Generator utility functions
 def get_appearance_text(aspect, roll):
